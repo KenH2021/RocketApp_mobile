@@ -1,19 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, ImageBackground} from 'react-native';
 import CustomerInput from '../CustomerInput';
 import styles from './styles';
 
-const StartupScreen = (props) => {
+const StartupScreen = () => {
+  const [username, setUsername] = useState('');
+  
   return (
     <View style={styles.bgkContainer}>
     <ImageBackground source={require('../../assets/bgk.jpg')} style={styles.images}/>
 
     <View style={styles.titles}>
-
       <Text style={styles.title}>Model S</Text>
       <Text style={styles.subtitle}>Starting at 9099 S</Text>
-      <CustomerInput/>
     </View>
+      <CustomerInput placeholder="Please enter your Email" value={username} setValue={setUsername}/>
   </View>
   );
 }
