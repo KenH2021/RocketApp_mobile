@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, ImageBackground} from 'react-native';
+import { View, Text, ImageBackground, Image} from 'react-native';
 import CustomerInput from '../CustomerInput';
 import styles from './styles';
 
@@ -9,6 +9,7 @@ const StartupScreen = () => {
   return (
     <View style={styles.bgkContainer}>
     <ImageBackground source={require('../../assets/bgk.jpg')} style={styles.images}/>
+    <Image source={require('../../assets/logo_w.png')} style={styles.logo}/>
 
     <View style={styles.titles}>
       <Text style={styles.title}>Model S</Text>

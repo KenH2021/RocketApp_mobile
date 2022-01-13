@@ -18,6 +18,7 @@ const CustomerInput = ({value, setValue, placeholder}) => {
   const styles = StyleSheet.create({
       container: {
           bottom: 50,
+          alignItems:'center',
           position: 'absolute',
           backgroundColor: 'white',
           width: '100%',
