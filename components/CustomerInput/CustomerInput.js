@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, StyleSheet} from 'react-native';
+import { View, TextInput, StyleSheet} from 'react-native';
 import { borderColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 const CustomerInput = ({value, setValue, placeholder}) => {
@@ -17,7 +17,7 @@ const CustomerInput = ({value, setValue, placeholder}) => {
 
   const styles = StyleSheet.create({
       container: {
-          bottom: 50,
+          bottom: 150,
           alignItems:'center',
           position: 'absolute',
           backgroundColor: 'white',
@@ -27,7 +27,6 @@ const CustomerInput = ({value, setValue, placeholder}) => {
           borderRadius: 5,
           paddingHorizontal: 10,
           marginVertical: 5,
-        
       },
       
       input: {},
