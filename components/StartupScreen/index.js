@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import { View, Text, ImageBackground, Image, Pressable} from 'react-native';
 import CustomerInput from '../CustomerInput';
 import CustomerButton from '../CustomerButton/CustomerButton';
+import {useNavigation} from '@react-navigation/native';
 import styles from './styles'
 
 
 const StartupScreen = () => {
   const [username, setUsername] = useState('');
+  const navigation = useNavigation();
 
   const OnSignInPressed = () => {
     console.warn("Sign In");
+
+    navigation.navigate('Home');
   }  
+
   return (
     <View style={styles.bgkContainer}>
     <ImageBackground source={require('../../assets/bgk.jpg')} style={styles.images}/>
