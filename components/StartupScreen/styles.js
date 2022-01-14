@@ -28,7 +28,17 @@ const styles = StyleSheet.create ({
         fontSize: 40,
         fontWeight: '600',
         },
-    subtitle: {
+    input: {
+        bottom: 150,
+        alignItems:'center',
+        position: 'absolute',
+        backgroundColor: 'white',
+        width: '100%',
+        borderColor: '#e8e8e8',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        marginVertical: 5,
     },
 });
 

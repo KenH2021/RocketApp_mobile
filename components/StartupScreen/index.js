@@ -1,34 +1,53 @@
-import React, { useState } from 'react';
-import { View, Text, ImageBackground, Image, Pressable} from 'react-native';
+import React, { Component , useState } from 'react';
+import { View, TextInput, ImageBackground, Image, Pressable, FlatList} from 'react-native';
 import CustomerInput from '../CustomerInput';
 import CustomerButton from '../CustomerButton/CustomerButton';
-import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
 import styles from './styles'
 
 
-const StartupScreen = () => {
-  const [username, setUsername] = useState('');
-  const navigation = useNavigation();
+export default class StartupScreen extends React.Component {
 
-  const OnSignInPressed = () => {
-    console.warn("Sign In");
+  state = {
+    email_input: ''
+  }
 
-    navigation.navigate('Home');
-  }  
+  getInfo() {
 
-  return (
-    <View style={styles.bgkContainer}>
-    <ImageBackground source={require('../../assets/bgk.jpg')} style={styles.images}/>
-    <Image source={require('../../assets/logo_w.png')} style={styles.logo}/>
+    // return axios.get(`https://rocket-ele.herokuapp.com/api/Employees/emailValidation?email=krista.sheely@codeboxx.biz`)
+    return axios.get(`https://rocket-ele.herokuapp.com/api/Employees/emailValidation?email=${this.state.email_input}`)
+      .then(res => {
+        const response = res.data;
+        console.log(this.state.email_input);
+        console.log(response);
 
-    <View style={styles.titles}>
-      <Text style={styles.title}>Model S</Text>
-      <Text style={styles.subtitle}>Starting at 9099 S</Text>
+        console.log(this.state.email_input);
+
+        if (response == true) {
+          this.props.navigation.navigate('Home');
+        } else {
+          console.log("Not a Employee");
+        }
+      })
+  
+
+  }
+
+  render() {
+    return (
+      <View style={styles.bgkContainer}>
+      <ImageBackground source={require('../../assets/bgk.jpg')} style={styles.images}/>
+      <Image source={require('../../assets/logo_w.png')} style={styles.logo}/>
+
+      <View style={styles.titles}>
+      <TextInput style={styles.input} placeholder="Please enter your Email" onChangeText={(text) => this.setState({ email_input: text })}/>
+
+      </View>
+        <CustomerButton text="Sign In" onPress={() => this.getInfo()} />
     </View>
-      <CustomerInput placeholder="Please enter your Email" value={username} setValue={setUsername}/>
-      <CustomerButton text="Sign In" onPress={OnSignInPressed} />
-  </View>
   );
 }
+}
 
-export default StartupScreen;
+
+
