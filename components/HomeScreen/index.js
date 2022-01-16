@@ -1,24 +1,90 @@
-import React, { useState } from 'react';
-import { View, Text, ImageBackground, StyleSheet, } from 'react-native';
+import React, { Component , useState } from 'react';
+import { View, Text, ImageBackground, Image, Pressable, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import CustomerInput from '../CustomerInput';
+import CustomerButton from '../CustomerButton/CustomerButton';
+import {useNavigation} from '@react-navigation/native';
+
+import axios from 'axios';
 
 
-const index = () => {
+export default class HomeScreen extends React.Component {
+  state = {elevatorList: []}
+  
 
-  return (
-    <View>
-        <Text >You Home mon ami</Text>
+  componentDidMount() {
+    axios.get(`https://rocket-ele.herokuapp.com/api/Elevators/OfflineElevators/`)
+      .then(res => {
+        const elevatorList = res.data;
+        this.setState({elevatorList});
+      })
+  }
 
-        <ImageBackground source={require('../../assets/bgk_home.jpg')} style={styles.images}/>
-  </View>
-  );
+    render() {
+      const Item = ({ item, onPress, backgroundColor, textColor }) => (
+        <TouchableOpacity onPress={(onPress) =>
+          this.props.navigation.navigate("Elevator", {id: item.id, status: item.status} )}
+        style={[styles.item, backgroundColor]}>
+          <Text style={styles.listContainer}>Elevator #:{item.id} Status:{item.status} </Text>
+        </TouchableOpacity>
+      );
+      
+      const renderItem = ({ item }) => {
+      
+    return (
+        <Item
+          item={item}
+        />
+      );
+    };
+
+    return (
+        <SafeAreaView style={styles.container}>
+          <FlatList
+            data={this.state.elevatorList}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id}
+          />
+
+        </SafeAreaView>
+        
+        );
+  }
 }
 
 const styles = StyleSheet.create ({
-    images: {
-        width: '100%',
-        height: '100%',
-        resizeMode: 'cover',
-        },
+  header: {
+    top: 15,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    padding: 5,
+
+  },
+  listContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey',
+    fontSize: 19,
+    backgroundColor: '#ddd',
+    flexDirection: 'row',
+    marginVertical: 5,
+    textAlign:'center',
+    padding: 3,
+    borderRadius: 10,
+    justifyContent:'space-between',
+    
+  },
+  listName: {
+    textAlign:'center',
+    flex: 0.5,
+    alignItems:'flex-start',
+    padding: 3,
+  },
+    item: {
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 5,
+    },
+    title: {
+      fontSize: 32,
+    },
 });
 
-export default index;
