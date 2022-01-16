@@ -1,9 +1,7 @@
 import React, { Component , useState } from 'react';
-import { View, Text, ImageBackground, Image, Pressable, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
-import CustomerInput from '../CustomerInput';
-import CustomerButton from '../CustomerButton/CustomerButton';
+import { View, Text, ImageBackground, Image, Pressable, FlatList, StyleSheet, TouchableOpacity, SafeAreaView, Alert } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
+import LogOut from '../LogOut';
 import axios from 'axios';
 
 
@@ -18,6 +16,10 @@ export default class HomeScreen extends React.Component {
         this.setState({elevatorList});
       })
   }
+  logOut() {
+    Alert.alert("Success!","You're not log in anymore");
+    this.props.navigation.navigate('SignIn');
+  }
 
     render() {
       const Item = ({ item, onPress, backgroundColor, textColor }) => (
@@ -27,6 +29,7 @@ export default class HomeScreen extends React.Component {
           <Text style={styles.listContainer}>Elevator #:{item.id} Status:{item.status} </Text>
         </TouchableOpacity>
       );
+
       
       const renderItem = ({ item }) => {
       
@@ -44,6 +47,8 @@ export default class HomeScreen extends React.Component {
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
           />
+        <LogOut text="Log Out" onPress={() => this.logOut()} />
+
 
         </SafeAreaView>
         
