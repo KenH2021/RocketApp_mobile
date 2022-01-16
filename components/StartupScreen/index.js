@@ -14,7 +14,6 @@ export default class StartupScreen extends React.Component {
 
   getInfo() {
 
-    // return axios.get(`https://rocket-ele.herokuapp.com/api/Employees/emailValidation?email=krista.sheely@codeboxx.biz`)
     return axios.get(`https://rocket-ele.herokuapp.com/api/Employees/emailValidation?email=${this.state.email_input}`)
       .then(res => {
         const response = res.data;
