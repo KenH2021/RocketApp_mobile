@@ -24,7 +24,7 @@
     "react-native-web": "0.17.1"
   },
   "engines": {
-    "node": ">=12.13.0"
+    "node": ">=14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
