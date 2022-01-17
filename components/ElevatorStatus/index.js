@@ -1,8 +1,8 @@
 import React, { Component , useState } from 'react';
-import { View, Text, ImageBackground, Image, Pressable, FlatList, StyleSheet, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, Image} from 'react-native';
 import LogOut from '../LogOut';
 import axios from 'axios';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import { Button } from 'react-native-web';
 
 export default class ElevatorStatus extends React.Component {
   state = {updatedStatus: []}
@@ -14,8 +14,6 @@ export default class ElevatorStatus extends React.Component {
   }
   
   async updateElevatorStatus() {
-    console.log("Cliked");
-    console.log(this.props.route.params.id);
     
      await axios.put(`https://rocket-ele.herokuapp.com/api/Elevators/changeStatus/${this.props.route.params.id}`)
     .then(res => {
@@ -25,9 +23,7 @@ export default class ElevatorStatus extends React.Component {
      await axios.get(`https://rocket-ele.herokuapp.com/api/Elevators/newStatus/${this.props.route.params.id}`)
     .then(res => {
       const data = res.data.status;
-      console.log(data);
       this.setState({data});
-      console.log(data.status);
     })
   }
   
@@ -42,15 +38,18 @@ export default class ElevatorStatus extends React.Component {
 
 
   return (
-
+    
     <View style={styles.listContainer}>
-      <Text style={styles.header}>
-        Elevator List
-      </Text>
-      <Text style={styles.listName}>Elevator #:{id}</Text>
-      <Text style={[styles.status, {color: updateStatusColor}]}>Status:{this.state.data}</Text>
+      <Image source={require('../../assets/header.png')} style={styles.colorHeader}/>
 
-      <Text style={styles.listName}>
+      <Text style={styles.header}>
+        Elevator Status
+      </Text>
+      <Text style={styles.wrap}>
+        <Text style={styles.listName}>Elevator #:{id}</Text>
+        <Text style={[styles.status, {color: updateStatusColor}]}>Status:{this.state.data}</Text>
+      </Text>
+      <Text style={styles.button_container}>
       <LogOut text="Update Elevator Status" onPress={() => this.updateElevatorStatus()} />
       <LogOut text="Back" onPress={() => this.back()} />
       </Text>
@@ -59,31 +58,30 @@ export default class ElevatorStatus extends React.Component {
     );
    }
   }
-
-const styles = StyleSheet.create ({
-  header: {
-    fontSize: 25,
-    alignItems:'center',
-    backgroundColor: '#ddd',
-    top: 5,
-    padding: 3,      
-  },
-  button_container: {
-    justifyContent:'space-between',
+  
+  const styles = StyleSheet.create ({
+    header: {
+      textTransform: 'uppercase',
+      fontSize: 25,
+      alignItems:'center',
+      backgroundColor: '#ddd',
+      top: 120,
+      padding: 3,      
+    },
+    button_container: {
+    justifyContent:'center',
     bottom: 80,
     padding: 3,      
+    top: 200,
+    justifyContent:'center',
   },
   listContainer: {
     width: '100%',
     height: '100%',
-
-    flex: 1,
-    width: "100%",
-    height: "100%",
+    flex: 0,
     alignItems:'center',
     backgroundColor: '#ddd',
-    marginVertical: 5,
-    top: 100,
+    top: 15,
   },
   listName: {
     alignContent: 'center',
@@ -98,6 +96,23 @@ const styles = StyleSheet.create ({
     padding: 3,
     alignItems:'center',
     textTransform: 'uppercase',
+  },
+  wrap: {
+    alignContent: 'center',
+    fontSize: 20,
+    padding: 3,
+    alignItems:'center',
+    textTransform: 'uppercase',
+    top: 200,
+  },
+  
+  colorHeader: {
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: 0,
+    width: '100%',
+    padding: 15,
+    alignItems: 'center',
   },
 });
 

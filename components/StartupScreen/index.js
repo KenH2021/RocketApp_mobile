@@ -1,6 +1,5 @@
 import React, { Component , useState } from 'react';
 import { View, TextInput, ImageBackground, Image, Pressable, FlatList} from 'react-native';
-import CustomerInput from '../CustomerInput';
 import CustomerButton from '../CustomerButton/CustomerButton';
 import axios from 'axios';
 import styles from './styles'
