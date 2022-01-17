@@ -5,7 +5,6 @@ const styles = StyleSheet.create ({
         width: '100%',
         height: '100%',
         alignItems:'center',
-
         },
     images: {
         width: '100%',
@@ -39,6 +38,7 @@ const styles = StyleSheet.create ({
         borderRadius: 5,
         paddingHorizontal: 10,
         marginVertical: 5,
+
     },
 });
 

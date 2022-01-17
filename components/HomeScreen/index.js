@@ -42,13 +42,16 @@ export default class HomeScreen extends React.Component {
 
     return (
         <SafeAreaView style={styles.container}>
+        <View style={styles.listContainer}>
+        <Image source={require('../../assets/header.png')} style={styles.colorHeader}/>
           <FlatList
+            style={styles.flatlist}
             data={this.state.elevatorList}
             renderItem={renderItem}
             keyExtractor={(item) => item.id}
           />
         <LogOut text="Log Out" onPress={() => this.logOut()} />
-
+        </View>
 
         </SafeAreaView>
         
@@ -62,7 +65,10 @@ const styles = StyleSheet.create ({
     textAlign: 'center',
     fontWeight: 'bold',
     padding: 5,
-
+    zIndex:0,
+  },
+  flatlist: {
+    top: 60,
   },
   listContainer: {
     borderBottomWidth: 1,
@@ -90,6 +96,14 @@ const styles = StyleSheet.create ({
     },
     title: {
       fontSize: 32,
+    },
+    colorHeader: {
+      resizeMode: 'contain',
+      position: 'absolute',
+      top: 0,
+      width: '100%',
+      padding: 15,
+      alignItems: 'center',
     },
 });
 

@@ -16,15 +16,10 @@ export default class StartupScreen extends React.Component {
     return axios.get(`https://rocket-ele.herokuapp.com/api/Employees/emailValidation?email=${this.state.email_input}`)
       .then(res => {
         const response = res.data;
-        console.log(this.state.email_input);
-        console.log(response);
-
-        console.log(this.state.email_input);
 
         if (response == true) {
           this.props.navigation.navigate('Home');
         } else {
-          console.log("Not a Employee");
         }
       })
   

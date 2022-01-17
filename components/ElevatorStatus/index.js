@@ -60,20 +60,19 @@ export default class ElevatorStatus extends React.Component {
   }
   
   const styles = StyleSheet.create ({
-    header: {
-      textTransform: 'uppercase',
-      fontSize: 25,
-      alignItems:'center',
-      backgroundColor: '#ddd',
-      top: 120,
-      padding: 3,      
-    },
-    button_container: {
+  header: {
+    textTransform: 'uppercase',
+    fontSize: 25,
+    alignItems:'center',
+    backgroundColor: '#ddd',
+    top: 120,
+    padding: 3,      
+  },
+  button_container: {
     justifyContent:'center',
     bottom: 80,
     padding: 3,      
     top: 200,
-    justifyContent:'center',
   },
   listContainer: {
     width: '100%',
