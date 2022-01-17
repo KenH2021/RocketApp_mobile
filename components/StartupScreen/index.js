@@ -1,5 +1,5 @@
 import React, { Component , useState } from 'react';
-import { View, TextInput, ImageBackground, Image, Pressable, FlatList} from 'react-native';
+import { View, TextInput, ImageBackground, Image, Pressable, FlatList, Alert} from 'react-native';
 import CustomerButton from '../CustomerButton/CustomerButton';
 import axios from 'axios';
 import styles from './styles'
@@ -20,6 +20,8 @@ export default class StartupScreen extends React.Component {
         if (response == true) {
           this.props.navigation.navigate('Home');
         } else {
+          Alert.alert("You're Email is not validate, Pleases contact our customer service ");
+
         }
       })
   
